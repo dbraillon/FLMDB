@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 creationComplete="alertPopup_creationCompleteHandler(event)">
+	
+	<s:Rect height="100%" width="100%">
+		<s:fill>
+			<s:SolidColor color="0x000000" alpha=".5" />
+		</s:fill>
+	</s:Rect>
+	
+	<s:Group id="contentPopup" 
+			 width="70%"
+			 horizontalCenter="0" verticalCenter="0">
+		
+		<s:VGroup height="100%" width="100%" gap="0">
+			
+			<s:Group height="40" width="100%">
+				
+				<s:Rect height="100%" width="100%"
+						topLeftRadiusX="5" topLeftRadiusY="5"
+						topRightRadiusX="5" topRightRadiusY="5">
+					<s:fill>
+						<s:RadialGradient>
+							<s:GradientEntry color="0x000000" alpha=".7" ratio=".66" />
+							<s:GradientEntry color="0x000000" alpha=".7" ratio=".33" />
+						</s:RadialGradient>
+					</s:fill>
+				</s:Rect>
+				
+				<s:VGroup height="100%" width="100%"
+						  paddingLeft="20" verticalAlign="middle">
+					<s:Label text="{title}" 
+							 color="0xffffff" fontWeight="bold" />
+				</s:VGroup>
+				
+			</s:Group>
+			
+			<s:Group height="100%" width="100%">
+				
+				<s:Rect height="100%" width="100%"
+						bottomLeftRadiusX="5" bottomLeftRadiusY="5"
+						bottomRightRadiusX="5" bottomRightRadiusY="5">
+					<s:fill>
+						<s:SolidColor color="0xffffff" />
+					</s:fill>
+				</s:Rect>
+				
+				<s:VGroup height="100%" width="100%" gap="20"
+						  horizontalCenter="0" verticalCenter="0"
+						  horizontalAlign="center" verticalAlign="middle"
+						  paddingBottom="15" paddingLeft="15" paddingRight="15" paddingTop="15">
+					<s:Label height="100%" width="100%"
+							 text="{message}" color="0x000000" />
+					<s:Button label="OK" skinClass="spark.skins.spark.ButtonSkin"
+							  click="ok_clickHandler(event)" />
+				</s:VGroup>
+				
+			</s:Group>
+			
+		</s:VGroup>
+		
+	</s:Group>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import spark.filters.DropShadowFilter;
+			
+			
+			public static function show(parent:DisplayObject, message:String, title:String):void
+			{
+				var alertPopup:AlertPopup = new AlertPopup();
+				alertPopup.height = parent.height;
+				alertPopup.width = parent.width;
+				alertPopup.parentObject = parent;
+				alertPopup.message = message;
+				alertPopup.title = title;
+				
+				PopUpManager.addPopUp(alertPopup, parent, true);
+				PopUpManager.centerPopUp(alertPopup);
+			}
+			
+			
+			private var _parentObject:DisplayObject;
+			private var _message:String;
+			private var _title:String;
+			
+			internal var _shadow:DropShadowFilter;
+			
+			protected function alertPopup_creationCompleteHandler(event:FlexEvent):void
+			{
+				_shadow = new DropShadowFilter();
+				_shadow.blurX = 16;
+				_shadow.blurY = 16;
+				
+				contentPopup.filters = [_shadow];
+				
+				parentObject.stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, stage_orientationChangeHandler);
+			}
+			
+			protected function stage_orientationChangeHandler(event:StageOrientationEvent):void
+			{
+				height = _parentObject.height;
+				width = _parentObject.width;
+			}
+			
+			protected function ok_clickHandler(event:MouseEvent):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			
+			[Bindable]
+			public function get title():String
+			{
+				return _title;
+			}
+			
+			public function set title(value:String):void
+			{
+				_title = value;
+			}
+			
+			[Bindable]
+			public function get message():String
+			{
+				return _message;
+			}
+			
+			public function set message(value:String):void
+			{
+				_message = value;
+			}
+			
+			[Bindable]
+			public function get parentObject():DisplayObject
+			{
+				return _parentObject;
+			}
+			
+			public function set parentObject(value:DisplayObject):void
+			{
+				_parentObject = value;
+			}
+			
+		]]>
+	</fx:Script>
+	
+</s:Group>
