@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 click="slidingMenu_clickHandler(event)">
+	
+	<fx:Declarations>
+		
+		<s:Move id="showEffect" target="{menu}"
+				xFrom="{menu.x}" xTo="{this.width - menu.width}" duration="300" />
+		
+		<s:Move id="hideEffect" target="{menu}"
+				xFrom="{menu.x}" xTo="{this.width}" duration="300"
+				effectEnd="visible = false;" />
+		
+	</fx:Declarations>
+	
+	<s:Group id="menu" height="100%" width="300">
+		
+		<s:Rect height="100%" width="100%">
+			<s:fill>
+				<s:SolidColor color="0x000000" />
+			</s:fill>
+		</s:Rect>
+		
+		<s:VGroup id="content" height="100%" width="100%"
+				  verticalAlign="middle">
+			
+			
+			
+		</s:VGroup>
+		
+	</s:Group>
+	
+	<fx:Script>
+		
+		<![CDATA[
+			import mx.core.IVisualElement;
+			
+			
+			private var _isOpen:Boolean;
+			private var _mxmlContent:Array;
+			
+			public function init():void
+			{
+				update();
+				hide();
+				
+				owner.stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, stage_orientationChangeHandler);
+			}
+			
+			protected function stage_orientationChangeHandler(event:StageOrientationEvent):void
+			{
+				update();
+			}
+			
+			protected function slidingMenu_clickHandler(event:MouseEvent):void
+			{
+				hide();
+			}
+			
+			public override function set mxmlContent(value:Array):void
+			{
+				_mxmlContent = value;
+			}
+			
+			protected override function createChildren():void
+			{
+				super.createChildren();
+				
+				if(_mxmlContent)
+				{
+					for(var i:int = 0; i < _mxmlContent.length; i++)
+					{
+						var element:IVisualElement = _mxmlContent[i];
+						content.addElement(element);
+					}
+				}
+			}
+			
+			public function show():void
+			{
+				visible = true;
+				showEffect.play();
+			}
+			
+			public function hide():void
+			{
+				hideEffect.play();
+			}
+			
+			private function update():void
+			{
+				height = owner.height;
+				width = owner.width;
+				
+				menu.x = width;
+			}
+			
+		]]>
+		
+	</fx:Script>
+	
+</s:Group>
