@@ -10,7 +10,7 @@
 	</s:Rect>
 	
 	<s:Group id="contentPopup" 
-			 width="70%"
+			 minWidth="200" maxWidth="400" width="70%"
 			 horizontalCenter="0" verticalCenter="0">
 		
 		<s:VGroup height="100%" width="100%" gap="0">
