@@ -2,7 +2,7 @@
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark"
 		xmlns:menus="com.lmdb.menus.*"
-		title="MenuView">
+		title="MenuView" xmlns:menus1="com.flmdb.menus.*">
 	
 	<s:VGroup height="100%" width="100%"
 			  horizontalAlign="center" verticalAlign="middle">
@@ -12,9 +12,9 @@
 		
 	</s:VGroup>
 	
-	<menus:SlidingMenu id="slidingMenu">
+	<menus1:SlidingMenu id="slidingMenu">
 		<s:Button id="searchViewButton" label="Search" />
-	</menus:SlidingMenu>
+	</menus1:SlidingMenu>
 	
 	<fx:Script>
 		<![CDATA[

@@ -5,8 +5,8 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import com.lmdb.popups.AlertPopup;
-			import com.lmdb.popups.WaitingPopup;
+			import com.flmdb.popups.AlertPopup;
+			import com.flmdb.popups.WaitingPopup;
 			
 			protected function alertPopupButton_clickHandler(event:MouseEvent):void
 			{

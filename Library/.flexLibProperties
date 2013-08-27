@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="true" version="3">
   <includeClasses>
-    <classEntry path="com.lmdb.popups.AlertPopup"/>
-    <classEntry path="com.lmdb.menus.SlidingMenu"/>
-    <classEntry path="com.lmdb.menus.SlidingMenuItem"/>
+    <classEntry path="com.flmdb.popups.AlertPopup"/>
+    <classEntry path="com.flmdb.menus.SlidingMenu"/>
+    <classEntry path="com.flmdb.menus.SlidingMenuItem"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
