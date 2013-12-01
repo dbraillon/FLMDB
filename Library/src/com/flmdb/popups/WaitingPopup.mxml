@@ -84,6 +84,11 @@
 				PopUpManager.centerPopUp(_currentPopup);
 			}
 			
+			public static function updateMessage(message:String):void
+			{
+				_currentPopup.message = message;
+			}
+			
 			public static function remove():void
 			{
 				PopUpManager.removePopUp(_currentPopup);
